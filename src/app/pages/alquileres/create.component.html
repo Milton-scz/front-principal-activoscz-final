@@ -1,0 +1,114 @@
+<div class="container mt-5">
+  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+    {{ successMessage }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+    {{ errorMessage }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <h2>Agregar Contrato de Alquiler</h2>
+  <form [formGroup]="alquilerForm" (ngSubmit)="onSubmit()">
+    <!-- Grupo Cliente -->
+    <div class="card mb-3">
+      <div class="card-header">
+        <h3>Datos del Cliente</h3>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="clienteSelect">Seleccionar Cliente:</label>
+          <select id="clienteSelect" formControlName="clienteId" class="form-control" (change)="seleccionarCliente($event)">
+            <option value="">Seleccionar cliente</option>
+            <option *ngFor="let cliente of filteredClientes" [value]="cliente.clienteId">{{ cliente.nombre }}</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="nombreCliente">Nombre del Cliente:</label>
+              <input type="text" id="nombreCliente" formControlName="nombreCliente" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+              <label for="cedulaCliente">Cédula del Cliente:</label>
+              <input type="text" id="cedulaCliente" formControlName="cedulaCliente" class="form-control" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="celularCliente">Celular del Cliente:</label>
+              <input type="text" id="celularCliente" formControlName="celularCliente" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+              <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+              <input type="text" id="fechaNacimiento" formControlName="fechaNacimiento" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+              <label for="direccionCliente">Dirección del Cliente:</label>
+              <input type="text" id="direccionCliente" formControlName="direccionCliente" class="form-control" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Grupo Activo -->
+    <div class="card mb-3">
+      <div class="card-header">
+        <h3>Datos del Activo</h3>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="activoSelect">Seleccionar Activo:</label>
+          <select id="activoSelect" formControlName="activoId" class="form-control" (change)="seleccionarActivo($event)">
+            <option value="">Seleccionar activo</option>
+            <option *ngFor="let activo of filteredActivos" [value]="activo._id">{{ activo.nombre }}</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="nombreActivo">Nombre del Activo:</label>
+              <input type="text" id="nombreActivo" formControlName="nombreActivo" class="form-control" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="estado">Estado del Activo:</label>
+              <input type="text" id="estado" formControlName="estado" class="form-control" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Información del Contrato -->
+    <div class="card mb-3">
+      <div class="card-header">
+        <h3>Información del Contrato</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="fechaInicio">Fecha de Inicio del Contrato:</label>
+              <input type="date" id="fechaInicio" formControlName="fechaInicio" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="fechaFinal">Fecha final del contrato:</label>
+              <input type="date" id="fechaFinal" formControlName="fechaFin" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="monto">Monto:</label>
+          <input type="text" id="monto" formControlName="monto" class="form-control" placeholder="Ingrese el monto del contrato">
+        </div>
+        <div class="form-group">
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" formControlName="descripcion" class="form-control" placeholder="Ingrese la descripción del contrato"></textarea>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Agregar Contrato</button>
+  </form>
+</div>
